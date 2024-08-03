@@ -2,8 +2,10 @@ from flask import Flask, render_template, request, jsonify
 from dotenv import load_dotenv
 import os
 from openai import OpenAI
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 # 載入 .env 檔案中的環境變數
 load_dotenv()
@@ -38,4 +40,4 @@ def chat():
          return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-     app.run(debug=True, port=9527)
+     app.run(debug=True, host='0.0.0.0',port=9527)
